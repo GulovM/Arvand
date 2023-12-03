@@ -119,7 +119,7 @@ def main():
             st.success('Кредит будет выдан.')
             st.success(f'Вероятность возврата кредита: {(result2*100).astype(int)}%')
             result4 = Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
-                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1)
+                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1[0])
             st.success(f'Сколько примерно дней вы возможно просрочите: {result4}')
                             
 if __name__ == '__main__':
