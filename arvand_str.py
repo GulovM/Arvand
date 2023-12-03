@@ -109,17 +109,17 @@ def main():
     result3 = ""
     result4 = ""
     if st.button("Predict"):
-        result1, result2 = int(issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-                    Net_profit, Age, Region_code, Direction_of_activity, business_experience)) 
+        result1, result2 = issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
+                    Net_profit, Age, Region_code, Direction_of_activity, business_experience)
         if result1 == 0:
-            result3 = int(Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-            Net_profit, Age, Region_code, Direction_of_activity, business_experience))
+            result3 = Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
+            Net_profit, Age, Region_code, Direction_of_activity, business_experience)
             st.success(f'Сумма кредита в случае отказа: {result3}')
         else:
             st.success('Кредит будет выдан.')
             st.success(f'Вероятность возврата кредита: {(result2*100).astype(int)}%')
-            result4 = int(Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
-                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1))
+            result4 = Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
+                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1)
             st.success(f'Сколько примерно дней вы возможно просрочите: {result4}')
                             
 if __name__ == '__main__':
