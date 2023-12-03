@@ -95,7 +95,11 @@ def main():
     }
     """
     st.markdown(f'<style>{style}</style>', unsafe_allow_html=True)
-    business_experience =  st.radio("Стаж работы:", options)
+    bus_exp =  st.radio("Стаж работы:", options)
+    label_encoder = LabelEncoder()
+    encoded_busEx = label_encoder.fit_transform(options)
+    business_experience = encoded_busEx[options.index(bus_exp)]
+
     
     Gross_profit = st.number_input('Ваша валовая прибыль(разница между маржинальной прибылью и постоянными производственными расходами):', step=1, value=0)
     Net_profit = st.number_input('Чистая прибыль:', step=1, value=0)
