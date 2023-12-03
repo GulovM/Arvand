@@ -19,11 +19,18 @@ with open("model_gb2.pkl", "rb") as pickle_in:
 # Функции для предсказаний
 def issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
                 Net_profit, Age, Region_code, Direction_of_activity, business_experience):
-    prediction = classifier.predict([[Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-                Net_profit, Age, Region_code, Direction_of_activity, business_experience]])
-    prediction2 = classifier.predict_proba([[Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-                Net_profit, Age, Region_code, Direction_of_activity, business_experience]])[:, 1]
+    # Преобразование business_experience в числовой формат
+    business_experience = int(business_experience)
+
+    # Преобразование всех переменных в числовой формат
+    prediction = classifier.predict([[float(Loan_amount), float(Loan_term), float(Days_of_delay), float(Number_of_delays), float(Lending_stage), float(Gross_profit), 
+                float(Net_profit), float(Age), float(Region_code), float(Direction_of_activity), float(business_experience)]])
+    
+    prediction2 = classifier.predict_proba([[float(Loan_amount), float(Loan_term), float(Days_of_delay), float(Number_of_delays), float(Lending_stage), float(Gross_profit), 
+                float(Net_profit), float(Age), float(Region_code), float(Direction_of_activity), float(business_experience)]])[:, 1]
+    
     return prediction, prediction2
+
 
 
 def Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
@@ -56,7 +63,7 @@ def main():
 
     Loan_amount = st.number_input('На какую сумму хотите взять кредит?', step=1, value=0) 
 
-    Loan_term = st.number_input('На какой срок вы хотите взять кредит?', step=1, value=0) 
+    Loan_term = st.number_input('На какой срок вы хотите взять кредит(месяц)?', step=1, value=0) 
 
     activity_options = ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'Торговля',
                         'Земледелие', 'Приобретение мебели', 'Оплата на лечение',
