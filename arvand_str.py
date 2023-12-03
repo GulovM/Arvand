@@ -116,11 +116,11 @@ def main():
             Net_profit, Age, Region_code, Direction_of_activity, business_experience)
             st.success(f'Сумма кредита в случае отказа: {result3}')
         else:
-            st.success('Кредит будет выдан.')
-            st.success(f'Вероятность возврата кредита: {(result2*100).astype(int)}%')
+            st.success('Кредит будет выдан с вероятностью {result1[0]*100}')
+            st.success(f'Вероятность возврата кредита вовремя: {(result2*100).astype(int)}%')
             result4 = Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
-                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1[0])
-            st.success(f'Сколько примерно дней вы возможно просрочите: {result4}')
+                    Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1)
+            st.success(f'Сколько примерно дней вы возможно просрочите: {result4[0].astype(int)}')
                             
 if __name__ == '__main__':
     main()
