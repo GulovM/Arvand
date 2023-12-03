@@ -35,14 +35,14 @@ def issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lendin
 
 def Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
                 Net_profit, Age, Region_code, Direction_of_activity, business_experience, issue):
-    reg1 = regression1.predict([[Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
-                Net_profit, Age, Region_code, Direction_of_activity, business_experience, issue]])  
+    reg1 = regression1.predict([[float(Loan_amount), float(Loan_term), float(Number_of_delays), float(Lending_stage), float(Gross_profit), 
+                float(Net_profit), float(Age), float(Region_code), float(Direction_of_activity), float(business_experience), float(issue)]])  
     return reg1  
 
 def Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
                 Net_profit, Age, Region_code, Direction_of_activity, business_experience):
-    reg2 = regression2.predict([[Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-                Net_profit, Age, Region_code, Direction_of_activity, business_experience]])  
+    reg2 = regression2.predict([[float(Loan_amount), float(Loan_term), float(Days_of_delay), float(Number_of_delays), float(Lending_stage), float(Gross_profit), 
+                float(Net_profit), float(Age), float(Region_code), float(Direction_of_activity), float(business_experience)]])  
     return reg2                  
                      
 # Основная функция
@@ -79,22 +79,9 @@ def main():
 
     Lending_stage = st.number_input('Сколько кредитов вы брали(с учетом этого)?', step=1, value=0)
     Number_of_delays = st.number_input('Сколько раз вы просрочили срок кредита?', step=1, value=0)
-    Days_of_delay = st.number_input('Сколько дней вы просрочили в послендий раз, когда брали кредит?', step=1, value=0)
+    Days_of_delay = st.number_input('Сколько дней вы просрочили в последний раз, когда брали кредит?', step=1, value=0)
     
     options = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-40', '40-50', '50+']
-    style = """
-    div[data-baseweb="radio"] {
-    padding: 10px;
-    margin: 10px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    }
-
-    div[data-baseweb="radio"]:hover {
-    background-color: #e0e0e0;
-    }
-    """
-    st.markdown(f'<style>{style}</style>', unsafe_allow_html=True)
     bus_exp =  st.radio("Стаж работы:", options)
     label_encoder = LabelEncoder()
     encoded_busEx = label_encoder.fit_transform(options)
@@ -116,11 +103,11 @@ def main():
             Net_profit, Age, Region_code, Direction_of_activity, business_experience)
             st.success(f'Сумма кредита в случае отказа: {result3}')
         else:
-            st.success('Кредит будет выдан с вероятностью {result1[0]*100}')
-            st.success(f'Вероятность возврата кредита вовремя: {(result2*100).astype(int)}%')
+            st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
+            st.success(f'Вероятность возврата кредита вовремя: {result2*100:.2f}%')
             result4 = Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
                     Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1)
-            st.success(f'Сколько примерно дней вы возможно просрочите: {result4[0].astype(int)}')
+            st.success(f'Сколько примерно дней вы возможно просрочите: {result4[0]:.2f}')
                             
 if __name__ == '__main__':
     main()
