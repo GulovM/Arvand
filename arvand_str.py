@@ -61,17 +61,13 @@ def main():
     encoded_region = label_encoder.fit_transform(region_options)
     Region_code = encoded_region[region_options.index(selected_region)]
 
-    Loan_amount = st.number_input('На какую сумму хотите взять кредит?', step=1, value=0) 
+    Loan_amount = st.number_input('На какую сумму хотите взять кредит(в сомони)?', step=1, value=0) 
 
     Loan_term = st.number_input('На какой срок вы хотите взять кредит(месяц)?', step=1, value=0) 
 
-    activity_options = ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'Торговля',
-                        'Земледелие', 'Приобретение мебели', 'Оплата на лечение',
-                        'Проведение мероприятий', 'Оплата поездок', 'Услуги',
-                        'Переоборудование транспорта', 'Потребнужды',
-                        'Оплата образования', 'Производство', 'Покупка квартиры', 'Потреб.другое',
-                        'Ремонт места деятельности', 'Животноводство', 'Сельское хозяйство', 'Все',
-                        'Сушка фруктов', 'Коммерческий']
+    activity_options = ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'Торговля', 'Земледелие', 'Приобретение мебели', 'Оплата на лечение',
+                        'Проведение мероприятий', 'Оплата поездок', 'Услуги', 'Переоборудование транспорта', 'Потребнужды', 'Оплата образования', 'Производство', 
+                        'Покупка квартиры', 'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство', 'Все', 'Сушка фруктов', 'Коммерческий']
     selected_activity = st.selectbox('Цель кредита:', activity_options)
     label_encoder1 = LabelEncoder()
     encoded_activity = label_encoder1.fit_transform(activity_options)
@@ -88,8 +84,8 @@ def main():
     business_experience = encoded_busEx[options.index(bus_exp)]
 
     
-    Gross_profit = st.number_input('Ваша валовая прибыль(разница между маржинальной прибылью и постоянными производственными расходами):', step=1, value=0)
-    Net_profit = st.number_input('Чистая прибыль:', step=1, value=0)
+    Gross_profit = st.number_input('Ваша валовая прибыль(разница между маржинальной прибылью и постоянными производственными расходами) в сомони(в месяц):', step=1, value=0)
+    Net_profit = st.number_input('Чистая прибыль в сомони(в месяц):', step=1, value=0)
         
     result1 = ""
     result2 = ""
@@ -99,9 +95,14 @@ def main():
         result1, result2 = issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
                     Net_profit, Age, Region_code, Direction_of_activity, business_experience)
         if result1 == 0:
-            result3 = Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
-            Net_profit, Age, Region_code, Direction_of_activity, business_experience)
-            st.success(f'Сумма кредита в случае отказа: {result3}')
+            left =  Number_of_delay/Number_of_delays
+            if left > 20:
+                st.success(f'К сожалению мы не можем выдать вам кредит: {result3}')
+            else:
+                result3 = Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
+                Net_profit, Age, Region_code, Direction_of_activity, business_experience)
+                st.success(f'Сумму, которую вы ввели, пока что вам недоступно')
+                st.success(f'Максимальная сумма, которую мы можем вам выдать: {result3.astype(int)}')
         else:
             st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
             st.success(f'Вероятность возврата кредита вовремя: {result2[0]*100:.2f}%')
