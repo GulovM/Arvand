@@ -102,7 +102,7 @@ def main():
                 result3 = Credit_sum(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
                 Net_profit, Age, Region_code, Direction_of_activity, business_experience)
                 st.success(f'Сумму, которую вы ввели, пока что вам недоступно')
-                st.success(f'Максимальная сумма, которую мы можем вам выдать: {result3.astype(int)}')
+                st.success(f'Максимальная сумма, которую мы можем вам выдать: {result3}')
         else:
             st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
             st.success(f'Вероятность возврата кредита вовремя: {result2[0]*100:.2f}%')
