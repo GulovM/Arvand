@@ -104,11 +104,12 @@ def main():
                 st.success(f'Сумму, которую вы ввели, пока что вам недоступно')
                 st.success(f'Максимальная сумма, которую мы можем вам выдать: {result3}')
         else:
-            st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
-            st.success(f'Вероятность возврата кредита вовремя: {result2[0]*100:.2f}%')
+            issue, refund, day_delay = st.columns(3)
+            issue.metric(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
+            refund.metric(f'Вероятность возврата кредита вовремя: {result2[0]*100:.2f}%')
             result4 = Delays_days(Loan_amount, Loan_term, Number_of_delays, Lending_stage, Gross_profit, 
                     Net_profit, Age, Region_code, Direction_of_activity, business_experience, result1)
-            st.success(f'Сколько примерно дней вы возможно просрочите: {(result4[0]).astype(int)}')
+           day_delay.metric(f'Сколько примерно дней вы возможно просрочите: {(result4[0]).astype(int)}')
                                                    
 if __name__ == '__main__':
     main()
