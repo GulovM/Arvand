@@ -95,7 +95,11 @@ def main():
         result1, result2 = issue_a_loan(Loan_amount, Loan_term, Days_of_delay, Number_of_delays, Lending_stage, Gross_profit, 
                     Net_profit, Age, Region_code, Direction_of_activity, business_experience)
         if result1 == 0:
-            left =  Days_of_delay/Number_of_delays
+            if Number_of_delays == 0:
+                Number_of_delays = Number_of_delays+1
+                left =  Days_of_delay/Number_of_delays
+            else:  
+                left =  Days_of_delay/Number_of_delays
             if left > 20:
                 st.success(f'К сожалению мы не можем выдать вам кредит(')
             else:
