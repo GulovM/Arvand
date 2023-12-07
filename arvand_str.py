@@ -16,7 +16,7 @@ with open("RF_model.pkl", "rb") as pickle_in:
 
 with open("XGB_model.pkl", "rb") as pickle_in:
     classifier3 = joblib.load(pickle_in)
-    
+
 with open("days.pkl", "rb") as pickle_in:
     regression1 = joblib.load(pickle_in)
 
@@ -26,41 +26,41 @@ with open("sum.pkl", "rb") as pickle_in:
 # Создание DataFrame с данными
 data1 = pd.DataFrame({'Nationality': ['Узбек', 'Точик', 'Тотор', 'Рус', 'Киргиз', 'Украин', 'Другие', 'Карис', 'Карачои']})
 data2 = pd.DataFrame({'Filial': ['Истаравшан', 'Хучанд', 'Ч. Расулов', 'Душанбе', 'Исфара', 'Панчакент']})
-data3 = pd.DataFrame({'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат', 'Душанбе', 'Навкент', 
-               'Кистакуз', 'Худжанд-Панчшанбе', 'Бустон', 'Истаравшан-филиал', 'Рудаки', 'Ашт', 'Калининобод', 
-               'Сино', 'Исфара', 'Хисор', 'Зафаробод', 'Ничони', 'Вахдат', 'Мехнатобод', 'Уяс', 'Дж.Расулов', 
-               'Конибодом', 'Дусти', 'Ниёзбек','Истаравшан', 'Рогун','Гончи', 'Чашмасор', 'Нофароч', 'Ободи', 
-               'Каракчикум', 'Оббурдон', 'Куруш', 'Ворух', 'Гулякандоз', 'Некфайз', 'Сомгор', 'Пунук', 'Панчакент', 
-               'Кулканд', 'Оппон', 'Файзобод', 'Турсунзода', 'Гусар', 'Равшан','Ифтихор', 'Х.Алиев', 'Ёри', 
+data3 = pd.DataFrame({'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат', 'Душанбе', 'Навкент',
+               'Кистакуз', 'Худжанд-Панчшанбе', 'Бустон', 'Истаравшан-филиал', 'Рудаки', 'Ашт', 'Калининобод',
+               'Сино', 'Исфара', 'Хисор', 'Зафаробод', 'Ничони', 'Вахдат', 'Мехнатобод', 'Уяс', 'Дж.Расулов',
+               'Конибодом', 'Дусти', 'Ниёзбек', 'Истаравшан', 'Рогун', 'Гончи', 'Чашмасор', 'Нофароч', 'Ободи',
+               'Каракчикум', 'Оббурдон', 'Куруш', 'Ворух', 'Гулякандоз', 'Некфайз', 'Сомгор', 'Пунук', 'Панчакент',
+               'Кулканд', 'Оппон', 'Файзобод', 'Турсунзода', 'Гусар', 'Равшан','Ифтихор', 'Х.Алиев', 'Ёри',
                'Мучун', 'Саразм']})
-data4 = pd.DataFrame({'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'торговля', 
+data4 = pd.DataFrame({'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'торговля',
                   'Земледелие', 'Приобретение мебели', 'Оплата на лечение', 'Проведение мероприятий', 'Оплата поездок',
-                  'Услуги', 'Переоборудование транспорта', 'Потребнужды', 'Оплата образования', 'Производство', 
-                  'Покупка квартиры', 'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство', 'Все', 
+                  'Услуги', 'Переоборудование транспорта', 'Потребнужды', 'Оплата образования', 'Производство',
+                  'Покупка квартиры', 'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство', 'Все',
                   'Сушка фруктов', 'Коммерческий']})
-data5 = pd.DataFrame({'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля', 'Зеленый кредит - Печки', 
+data5 = pd.DataFrame({'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля', 'Зеленый кредит - Печки',
                'Сельхозкультура (ТАФФ)', 'Ремонт жилья', 'Бизнес Экспресс', 'Услуги', 'KFW - Ремонт жилья',
-               'Сельхозтехника (ТАФФ)', 'KFW - Покупка и строит-во жилья', 'Производство', 'Образование', 
-               'Мигрант-бизнес 2', 'Мигрант-Потреб 2', 'Покупка и строит-во жилья', 'Товары в кредит', 'Корманд-кредит', 
-               'Мигрант', 'Старт-бизнес', 'Зеленый кредит - Солнечные батареи', ' Жилье для сотрудников', 'Достижения', 
+               'Сельхозтехника (ТАФФ)', 'KFW - Покупка и строит-во жилья', 'Производство', 'Образование',
+               'Мигрант-бизнес 2', 'Мигрант-Потреб 2', 'Покупка и строит-во жилья', 'Товары в кредит', 'Корманд-кредит',
+               'Мигрант', 'Старт-бизнес', 'Зеленый кредит - Солнечные батареи', ' Жилье для сотрудников', 'Достижения',
                'Сельхозкультура (Сароб)', 'Сельхозкультура-кредитная линия']})
 data6 = pd.DataFrame({'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога']})
 data7 = pd.DataFrame({'currency': ['Доллар США', 'Сомони', 'Рос.рубль']})
 
-# Функция для получения закодированных данных по выбранному значению
-def get_encoded_data(selected_value, column_data):
-    return pd.get_dummies(column_data[selected_value]).iloc[0, :]
-
-# Функция для получения закодированного значения по выбранному признаку
-def get_encoded_feature(selected_feature, data_frame):
-    selected_value = st.selectbox(selected_feature, data_frame)
-    return get_encoded_data(selected_value, data_frame[selected_feature])
+# Отдельные DataFrame для кодированных значений
+nationality_encoded = pd.get_dummies(data1['Nationality'])
+filial_encoded = pd.get_dummies(data2['Filial'])
+region_encoded = pd.get_dummies(data3['Region'])
+loan_goal_encoded = pd.get_dummies(data4['loan_goal'])
+sector_encoded = pd.get_dummies(data5['sector'])
+currency_encoded = pd.get_dummies(data7['currency'])
+pledge_encoded = pd.get_dummies(data6['pledge'])
 
 # Функции для предсказаний
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
-                 high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-                 sector_encoded, currency_encoded, pledge_encoded):
+                 high_debt, selected_nationality, selected_filial, selected_region, selected_loan_goal,
+                 selected_sector, selected_currency, selected_pledge):
     # Преобразование business_experience в числовой формат
     business_experience = int(business_experience)
 
@@ -71,20 +71,18 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
         high_debt
     ]
 
-    # Получение закодированных данных для категориальных признаков
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
+    # Добавляем закодированные значения для категориальных признаков
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
 
     # Объединение закодированных данных
-    input_data += [
-        nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-        sector_encoded, currency_encoded, pledge_encoded
-    ]
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded,
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
@@ -102,8 +100,8 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
 
 def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
-                 high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-                 sector_encoded, currency_encoded, pledge_encoded):
+                 high_debt, selected_nationality, selected_filial, selected_region, selected_loan_goal,
+                 selected_sector, selected_currency, selected_pledge):
     # Исправлено: добавлено преобразование business_experience в числовой формат
     business_experience = int(business_experience)
 
@@ -113,60 +111,52 @@ def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pre
         high_debt
     ]
 
-     # Получение закодированных данных для категориальных признаков
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
 
     # Объединение закодированных данных
-    input_data += [
-        nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-        sector_encoded, currency_encoded, pledge_encoded
-    ]
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded,
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
-    reg1 = regression1.predict(input_array)    
+    reg1 = regression1.predict(input_array)
     return reg1
 
-# Функция для предсказания суммы кредита
 def Credit_sum(Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-               Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
-               high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-               sector_encoded, currency_encoded, pledge_encoded, essue):
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
+                 high_debt, selected_nationality, selected_filial, selected_region, selected_loan_goal,
+                 selected_sector, selected_currency, selected_pledge, essue):
     # Исправлено: добавлено преобразование business_experience в числовой формат
     business_experience = int(business_experience)
 
     input_data = [
-        Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
+        Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
         Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
         high_debt, essue
     ]
 
-    # Получение закодированных данных для категориальных признаков
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
 
     # Объединение закодированных данных
-    input_data += [
-        nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
-        sector_encoded, currency_encoded, pledge_encoded
-    ]
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded,
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
-    reg2 = regression2.predict(input_array)    
-    return reg2
-                   
+    reg2 = regression2.predict(input_array)
+    return reg2      
 # Основная функция
 def main():
     sex = st.radio("Укажите свой пол:", ['Мужской', 'Женский'])
