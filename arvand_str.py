@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 # Заголовок
 st.subheader('Arvand Scoring')
 
+# Загрузка моделей и данных
 with open("CatBoost_model.pkl", "rb") as pickle_in:
     classifier1 = joblib.load(pickle_in)
 
@@ -21,36 +22,34 @@ with open("days.pkl", "rb") as pickle_in:
 
 with open("sum.pkl", "rb") as pickle_in:
     regression2 = joblib.load(pickle_in)
-new_data = pd.DataFrame({'Nationality': ['Узбек', 'Точик', 'Тотор', 'Рус', 'Киргиз', 'Украин', 'Другие', 'Карис',
- 'Карачои'],
-'Filial': ['Истаравшан', 'Хучанд', 'Ч. Расулов', 'Душанбе', 'Исфара', 'Панчакент'],
-'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат',
- 'Душанбе', 'Навкент', 'Кистакуз', 'Худжанд-Панчшанбе', 'Бустон',
- 'Истаравшан-филиал', 'Рудаки', 'Ашт', 'Калининобод', 'Сино', 'Исфара', 'Хисор',
- 'Зафаробод', 'Ничони', 'Вахдат', 'Мехнатобод', 'Уяс', 'Дж.Расулов', 'Конибодом',
- 'Дусти', 'Ниёзбек','Истаравшан', 'Рогун','Гончи', 'Чашмасор', 'Нофароч',
- 'Ободи', 'Каракчикум', 'Оббурдон', 'Куруш', 'Ворух', 'Гулякандоз', 'Некфайз',
- 'Сомгор', 'Пунук', 'Панчакент', 'Кулканд', 'Оппон', 'Файзобод', 'Турсунзода',
- 'Гусар', 'Равшан','Ифтихор', 'Х.Алиев', 'Ёри', 'Мучун', 'Саразм'],
-'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники',
-       'Ремонт дома', 'торговля', 'Земледелие', 'Приобретение мебели',
-       'Оплата на лечение', 'Проведение мероприятий', 'Оплата поездок',
-       'Услуги', 'Переоборудование транспорта', 'Потребнужды',
-       'Оплата образования', 'Производство', 'Покупка квартиры',
-       'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство',
-       'Все', 'Сушка фруктов', 'Коммерческий'],
-'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля',
-       'Зеленый кредит - Печки', 'Сельхозкультура (ТАФФ)', 'Ремонт жилья',
-       'Бизнес Экспресс', 'Услуги', 'KFW - Ремонт жилья',
-       'Сельхозтехника (ТАФФ)', 'KFW - Покупка и строит-во жилья',
-       'Производство', 'Образование', 'Мигрант-бизнес 2',
-       'Мигрант-Потреб 2', 'Покупка и строит-во жилья', 'Товары в кредит',
-       'Корманд-кредит', 'Мигрант', 'Старт-бизнес',
-       'Зеленый кредит - Солнечные батареи', ' Жилье для сотрудников',
-       'Достижения', 'Сельхозкультура (Сароб)',
-       'Сельхозкультура-кредитная линия'],
-'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога'],
-'currency': ['Доллар США', 'Сомони', 'Рос.рубль']}
+
+# Создание DataFrame с данными
+new_data = pd.DataFrame({
+    'Nationality': ['Узбек', 'Точик', 'Тотор', 'Рус', 'Киргиз', 'Украин', 'Другие', 'Карис', 'Карачои'],
+    'Filial': ['Истаравшан', 'Хучанд', 'Ч. Расулов', 'Душанбе', 'Исфара', 'Панчакент'],
+    'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат', 'Душанбе', 'Навкент', 
+               'Кистакуз', 'Худжанд-Панчшанбе', 'Бустон', 'Истаравшан-филиал', 'Рудаки', 'Ашт', 'Калининобод', 
+               'Сино', 'Исфара', 'Хисор', 'Зафаробод', 'Ничони', 'Вахдат', 'Мехнатобод', 'Уяс', 'Дж.Расулов', 
+               'Конибодом', 'Дусти', 'Ниёзбек','Истаравшан', 'Рогун','Гончи', 'Чашмасор', 'Нофароч', 'Ободи', 
+               'Каракчикум', 'Оббурдон', 'Куруш', 'Ворух', 'Гулякандоз', 'Некфайз', 'Сомгор', 'Пунук', 'Панчакент', 
+               'Кулканд', 'Оппон', 'Файзобод', 'Турсунзода', 'Гусар', 'Равшан','Ифтихор', 'Х.Алиев', 'Ёри', 
+               'Мучун', 'Саразм'],
+    'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'торговля', 
+                  'Земледелие', 'Приобретение мебели', 'Оплата на лечение', 'Проведение мероприятий', 'Оплата поездок',
+                  'Услуги', 'Переоборудование транспорта', 'Потребнужды', 'Оплата образования', 'Производство', 
+                  'Покупка квартиры', 'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство', 'Все', 
+                  'Сушка фруктов', 'Коммерческий'],
+    'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля', 'Зеленый кредит - Печки', 
+               'Сельхозкультура (ТАФФ)', 'Ремонт жилья', 'Бизнес Экспресс', 'Услуги', 'KFW - Ремонт жилья',
+               'Сельхозтехника (ТАФФ)', 'KFW - Покупка и строит-во жилья', 'Производство', 'Образование', 
+               'Мигрант-бизнес 2', 'Мигрант-Потреб 2', 'Покупка и строит-во жилья', 'Товары в кредит', 'Корманд-кредит', 
+               'Мигрант', 'Старт-бизнес', 'Зеленый кредит - Солнечные батареи', ' Жилье для сотрудников', 'Достижения', 
+               'Сельхозкультура (Сароб)', 'Сельхозкультура-кредитная линия'],
+    'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога'],
+    'currency': ['Доллар США', 'Сомони', 'Рос.рубль']
+})
+
+# Отдельные DataFrame для кодированных значений
 nationality_encoded1 = pd.get_dummies(new_data['Nationality']).iloc[0, :]
 filial_encoded1 = pd.get_dummies(new_data['Filial']).iloc[0, :]
 region_encoded1 = pd.get_dummies(new_data['Region']).iloc[0, :]
@@ -58,13 +57,14 @@ loan_goal_encoded1 = pd.get_dummies(new_data['loan_goal']).iloc[0, :]
 sector_encoded1 = pd.get_dummies(new_data['sector']).iloc[0, :]
 currency_encoded1 = pd.get_dummies(new_data['currency']).iloc[0, :]
 pledge_encoded1 = pd.get_dummies(new_data['pledge']).iloc[0, :]
+
 # Функции для предсказаний
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded):
     # Преобразование business_experience в числовой формат
-    business_experience = int(business_experiense)
+    business_experience = int(business_experience)
 
     # Преобразование всех переменных в числовой формат
     input_data = [
@@ -96,13 +96,13 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
     total_pred2 = total_pred2.astype(int)
     return total_pred, total_pred2
 
-
-
-
 def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded):
+    # Исправлено: добавлено преобразование business_experience в числовой формат
+    business_experience = int(business_experience)
+
     input_data = [
         Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
         Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
@@ -124,9 +124,12 @@ def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pre
     return reg1  
 
 def Credit_sum(Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded, essue):
+    # Исправлено: добавлено преобразование business_experience в числовой формат
+    business_experience = int(business_experience)
+
     input_data = [
         Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
         Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
@@ -145,8 +148,8 @@ def Credit_sum(Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Len
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
     reg2 = regression2.predict(input_array)    
-    return reg2                  
-                     
+    return reg2
+                   
 # Основная функция
 def main():
     sex = st.radio("Укажите свой пол:", ['Мужской', 'Женский'])
