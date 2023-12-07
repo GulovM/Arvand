@@ -62,8 +62,13 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
     ]
 
     # Объединение закодированных данных
-    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
-                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
+    input_data.extend(nationality_encoded.values.flatten())
+    input_data.extend(filial_encoded.values.flatten())
+    input_data.extend(region_encoded.values.flatten())
+    input_data.extend(loan_goal_encoded.values.flatten())
+    input_data.extend(sector_encoded.values.flatten())
+    input_data.extend(currency_encoded.values.flatten())
+    input_data.extend(pledge_encoded.values.flatten())
                      
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
@@ -78,6 +83,7 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
     total_pred2 = (prediction2_1 + prediction2_2 + prediction2_3) / 3
     total_pred2 = total_pred2.astype(int)
     return total_pred, total_pred2
+
 
 def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
