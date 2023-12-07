@@ -3,7 +3,6 @@ import joblib
 import pandas as pd
 import streamlit as st
 from sklearn.preprocessing import LabelEncoder
-pip install catboost
 
 # Заголовок
 st.subheader('Arvand Scoring')
