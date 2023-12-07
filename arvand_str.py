@@ -156,11 +156,8 @@ def main():
     else:
         Gender = 1
     nationality_encoded = []    
-    # Выбор национальности
     selected_nationality = st.selectbox('Национальность:', data1['Nationality'])
-    
-    # Получение закодированных значений для выбранной национальности
-    nationality_encoded = pd.concat([nationality_encoded, pd.get_dummies(selected_nationality)])
+    nationality_encoded = pd.get_dummies(selected_nationality)
     
     Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
 
