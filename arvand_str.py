@@ -72,14 +72,18 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
     ]
 
     # Добавляем закодированные значения для категориальных признаков
-    input_data += nationality_encoded.to_numpy().tolist()
-    input_data += filial_encoded.to_numpy().tolist()
-    input_data += region_encoded.to_numpy().tolist()
-    input_data += loan_goal_encoded.to_numpy().tolist()
-    input_data += sector_encoded.to_numpy().tolist()
-    input_data += currency_encoded.to_numpy().tolist()
-    input_data += pledge_encoded.to_numpy().tolist()
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
 
+    # Объединение закодированных данных
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
+                     
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
     prediction1 = classifier1.predict(input_array)
@@ -107,14 +111,17 @@ def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pre
         high_debt
     ]
 
-    # Добавляем закодированные значения для категориальных признаков
-    input_data += nationality_encoded.to_numpy().tolist()
-    input_data += filial_encoded.to_numpy().tolist()
-    input_data += region_encoded.to_numpy().tolist()
-    input_data += loan_goal_encoded.to_numpy().tolist()
-    input_data += sector_encoded.to_numpy().tolist()
-    input_data += currency_encoded.to_numpy().tolist()
-    input_data += pledge_encoded.to_numpy().tolist()
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
+
+    # Объединение закодированных данных
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
@@ -135,13 +142,17 @@ def Credit_sum(Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Len
     ]
 
     # Добавляем закодированные значения для категориальных признаков
-    input_data += nationality_encoded.tolist()
-    input_data += filial_encoded.tolist()
-    input_data += region_encoded.tolist()
-    input_data += loan_goal_encoded.tolist()
-    input_data += sector_encoded.tolist()
-    input_data += currency_encoded.tolist()
-    input_data += pledge_encoded.tolist()
+    nationality_encoded = pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :]
+    filial_encoded = pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :]
+    region_encoded = pd.get_dummies(data3['Region'][selected_region]).iloc[0, :]
+    loan_goal_encoded = pd.get_dummies(data4['loan_goal'][selected_loan_goal]).iloc[0, :]
+    sector_encoded = pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :]
+    currency_encoded = pd.get_dummies(data7['currency'][selected_currency]).iloc[0, :]
+    pledge_encoded = pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :]
+
+    # Объединение закодированных данных
+    input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
+                            loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
