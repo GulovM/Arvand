@@ -72,13 +72,13 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
     ]
 
     # Добавляем закодированные значения для категориальных признаков
-    input_data += nationality_encoded.tolist()
-    input_data += filial_encoded.tolist()
-    input_data += region_encoded.tolist()
-    input_data += loan_goal_encoded.tolist()
-    input_data += sector_encoded.tolist()
-    input_data += currency_encoded.tolist()
-    input_data += pledge_encoded.tolist()
+    input_data += nationality_encoded.to_numpy().tolist()
+    input_data += filial_encoded.to_numpy().tolist()
+    input_data += region_encoded.to_numpy().tolist()
+    input_data += loan_goal_encoded.to_numpy().tolist()
+    input_data += sector_encoded.to_numpy().tolist()
+    input_data += currency_encoded.to_numpy().tolist()
+    input_data += pledge_encoded.to_numpy().tolist()
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
@@ -108,13 +108,13 @@ def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pre
     ]
 
     # Добавляем закодированные значения для категориальных признаков
-    input_data += nationality_encoded.tolist()
-    input_data += filial_encoded.tolist()
-    input_data += region_encoded.tolist()
-    input_data += loan_goal_encoded.tolist()
-    input_data += sector_encoded.tolist()
-    input_data += currency_encoded.tolist()
-    input_data += pledge_encoded.tolist()
+    input_data += nationality_encoded.to_numpy().tolist()
+    input_data += filial_encoded.to_numpy().tolist()
+    input_data += region_encoded.to_numpy().tolist()
+    input_data += loan_goal_encoded.to_numpy().tolist()
+    input_data += sector_encoded.to_numpy().tolist()
+    input_data += currency_encoded.to_numpy().tolist()
+    input_data += pledge_encoded.to_numpy().tolist()
 
     # Преобразуем в массив numpy и делаем предсказание
     input_array = np.array(input_data).reshape(1, -1)
