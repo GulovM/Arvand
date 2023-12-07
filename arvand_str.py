@@ -182,28 +182,28 @@ def main():
         type_of_credit = 1
         
     filial_encoded = []
-    selected_filial = st.selectbox('Филиал банка:', filial_encoded1)
-    filial_encoded += list(pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :])
+    selected_filial = st.selectbox('Филиал банка:', data2)
+    filial_encoded = pd.get_dummies(selected_filial)
 
     region_encoded = []
-    selected_region = st.selectbox('Регион\город проживания:', region_encoded1)
-    region_encoded += list(pd.get_dummies(data3['Region'][selected_region]).iloc[0, :])
+    selected_region = st.selectbox('Регион\город проживания:', data3)
+    region_encoded = pd.get_dummies(selected_region)
 
     sector_encoded = []
-    selected_sector = st.selectbox('Сфера деятельности:', sector_encoded1)
-    sector_encoded += list(pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :])
+    selected_sector = st.selectbox('Сфера деятельности:', data5)
+    sector_encoded = pd.get_dummies(selected_sector)
 
     selected_goal = []
-    selected_goal = st.selectbox('Цель кредита:', loan_goal_encoded1)
-    loan_goal_encoded += list(pd.get_dummies(data4['loan_goal'][selected_goal]).iloc[0, :]) 
+    selected_goal = st.selectbox('Цель кредита:', data4)
+    loan_goal_encoded = pd.get_dummies(selected_goal)
 
     selected_pledge = []
-    selected_pledge = st.selectbox('Тип залога:', pledge_encoded1)
-    pledge_encoded += list(pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :])  
+    selected_pledge = st.selectbox('Тип залога:', data6)
+    pledge_encoded = pd.get_dummies(selected_pledge)
 
     currency_encoded = []
-    selected_currancy = st.selectbox('Тип валюты:', currency_encoded1)
-    currency_encoded += list(pd.get_dummies(data7['currency'][selected_currancy]).iloc[0, :])
+    selected_currancy = st.selectbox('Тип валюты:', data7)
+    currency_encoded = pd.get_dummies(selected_currancy)
 
     Loan_amount = st.number_input('На какую сумму хотите взять кредит(в сомони)?', step=1, value=0) 
 
