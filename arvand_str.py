@@ -59,13 +59,7 @@ pledge_encoded = pd.get_dummies(data6['pledge'])
 used_keys = {}
 
 def get_encoded_feature(feature_name, data):
-    if feature_name not in used_keys:
-        used_keys[feature_name] = 0
-
-    unique_key = f'{feature_name}_selectbox_key_{used_keys[feature_name]}'
-    used_keys[feature_name] += 1
-
-    selected_feature = st.selectbox(f'Select {feature_name}:', data, key=unique_key)
+    selected_feature = st.selectbox(f'Select {feature_name}:', data)
     return pd.get_dummies(selected_feature)
 
     
@@ -82,15 +76,6 @@ def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pr
         Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
         high_debt
     ]
-
-    # Добавляем закодированные значения для категориальных признаков
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
 
     # Объединение закодированных данных
     input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
@@ -123,14 +108,6 @@ def Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_pre
         high_debt
     ]
 
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
-
     # Объединение закодированных данных
     input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
                             loan_goal_encoded, sector_encoded, currency_encoded, pledge_encoded], axis=0)
@@ -152,15 +129,6 @@ def Credit_sum(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_prei
         Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
         high_debt, issue
     ]
-
-    # Добавляем закодированные значения для категориальных признаков
-    nationality_encoded = get_encoded_feature('Nationality', data1)
-    filial_encoded = get_encoded_feature('Filial', data2)
-    region_encoded = get_encoded_feature('Region', data3)
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
-    sector_encoded = get_encoded_feature('sector', data5)
-    currency_encoded = get_encoded_feature('currency', data7)
-    pledge_encoded = get_encoded_feature('pledge', data6)
 
     # Объединение закодированных данных
     input_data = pd.concat([pd.Series(input_data), nationality_encoded, filial_encoded, region_encoded, 
