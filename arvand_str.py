@@ -169,8 +169,6 @@ def main():
     
     FamilySize = st.number_input('Сколько человек в семье?', step=1, value=0)
     
-    Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
-    
     educ =  ['Аспирантура', 'Оли', 'Миёнаи махсус', 'Олии нопурра', 'Миёна', 'Миёнаи нопурра']
     education = st.selectbox('Уровень образования:', educ)
     label_encoder = LabelEncoder()
