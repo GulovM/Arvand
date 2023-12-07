@@ -56,8 +56,15 @@ sector_encoded = pd.get_dummies(data5['sector'])
 currency_encoded = pd.get_dummies(data7['currency'])
 pledge_encoded = pd.get_dummies(data6['pledge'])
 
+used_keys = {}
+
 def get_encoded_feature(feature_name, data):
-    unique_key = hash(f'{feature_name}_selectbox_key')
+    if feature_name not in used_keys:
+        used_keys[feature_name] = 0
+
+    unique_key = f'{feature_name}_selectbox_key_{used_keys[feature_name]}'
+    used_keys[feature_name] += 1
+
     selected_feature = st.selectbox(f'Select {feature_name}:', data, key=unique_key)
     return pd.get_dummies(selected_feature)
 
