@@ -155,7 +155,7 @@ def main():
         Gender = 0
     else:
         Gender = 1
-        
+    nationality_encoded = []    
     selected_nationality = st.selectbox('Национальность:', nationality_encoded1)    
     nationality_encoded += list(pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :])
     
@@ -182,22 +182,28 @@ def main():
         type_of_credit = 0
     else:
         type_of_credit = 1
-
+        
+    filial_encoded = []
     selected_filial = st.selectbox('Филиал банка:', filial_encoded1)
     filial_encoded += list(pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :])
-    
+
+    region_encoded = []
     selected_region = st.selectbox('Регион\город проживания:', region_encoded1)
     region_encoded += list(pd.get_dummies(data3['Region'][selected_region]).iloc[0, :])
 
+    sector_encoded = []
     selected_sector = st.selectbox('Сфера деятельности:', sector_encoded1)
     sector_encoded += list(pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :])
 
+    selected_goal = []
     selected_goal = st.selectbox('Цель кредита:', loan_goal_encoded1)
     loan_goal_encoded += list(pd.get_dummies(data4['loan_goal'][selected_goal]).iloc[0, :]) 
 
+    selected_pledge = []
     selected_pledge = st.selectbox('Тип залога:', pledge_encoded1)
     pledge_encoded += list(pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :])  
-    
+
+    currency_encoded = []
     selected_currancy = st.selectbox('Тип валюты:', currency_encoded1)
     currency_encoded += list(pd.get_dummies(data7['currency'][selected_currancy]).iloc[0, :])
 
