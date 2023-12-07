@@ -244,7 +244,7 @@ def main():
             st.success(f'Максимальная сумма, которую мы можем вам выдать: {result3}')
         else:
             st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
-            st.success(f'Вероятность возврата кредита вовремя: {np.asscalar(result2[0])*100:.2f}%')
+            st.success(f'Вероятность возврата кредита вовремя: {float(result2[0])*100:.2f}%')
             result4 = Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
