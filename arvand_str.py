@@ -57,8 +57,10 @@ currency_encoded = pd.get_dummies(data7['currency'])
 pledge_encoded = pd.get_dummies(data6['pledge'])
 
 def get_encoded_feature(feature_name, data):
-    selected_feature = st.selectbox(f'Select {feature_name}:', data, key=f'{feature_name}_selectbox')
+    unique_key = f'{feature_name}_selectbox_{id(data)}'
+    selected_feature = st.selectbox(f'Select {feature_name}:', data, key=unique_key)
     return pd.get_dummies(selected_feature)
+
     
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
