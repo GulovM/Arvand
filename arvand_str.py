@@ -131,13 +131,13 @@ def main():
     else:
         Gender = 1
         
-# Создаем dummy-столбцы со значениями False для всех категорий
-nationality_encoded = pd.get_dummies(data1, prefix='', prefix_sep='').astype(bool)
-# Получаем выбор пользователя
-selected_nationality = st.selectbox('Введите национальность:', data1)
-# Если выбор сделан, обновляем соответствующий dummy-столбец в True
-if selected_nationality is not None:
-    nationality_encoded = nationality_encoded[selected_nationality].astype(bool)
+    # Создаем dummy-столбцы со значениями False для всех категорий
+    nationality_encoded = pd.get_dummies(data1, prefix='', prefix_sep='').astype(bool)
+    # Получаем выбор пользователя
+    selected_nationality = st.selectbox('Введите национальность:', data1)
+    # Если выбор сделан, обновляем соответствующий dummy-столбец в True
+    if selected_nationality is not None:
+        nationality_encoded = nationality_encoded[selected_nationality].astype(bool)
     
     Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
 
