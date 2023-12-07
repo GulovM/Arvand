@@ -24,39 +24,37 @@ with open("sum.pkl", "rb") as pickle_in:
     regression2 = joblib.load(pickle_in)
 
 # Создание DataFrame с данными
-new_data = pd.DataFrame({
-    'Nationality': ['Узбек', 'Точик', 'Тотор', 'Рус', 'Киргиз', 'Украин', 'Другие', 'Карис', 'Карачои'],
-    'Filial': ['Истаравшан', 'Хучанд', 'Ч. Расулов', 'Душанбе', 'Исфара', 'Панчакент'],
-    'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат', 'Душанбе', 'Навкент', 
+data1 = pd.DataFrame({'Nationality': ['Узбек', 'Точик', 'Тотор', 'Рус', 'Киргиз', 'Украин', 'Другие', 'Карис', 'Карачои']})
+data2 = pd.DataFrame({'Filial': ['Истаравшан', 'Хучанд', 'Ч. Расулов', 'Душанбе', 'Исфара', 'Панчакент']})
+data3 = pd.DataFrame({'Region': ['Шахристон', 'Гули сурх', 'Худжанд-Центр', 'Спитамен', 'Шарк', 'Мархамат', 'Душанбе', 'Навкент', 
                'Кистакуз', 'Худжанд-Панчшанбе', 'Бустон', 'Истаравшан-филиал', 'Рудаки', 'Ашт', 'Калининобод', 
                'Сино', 'Исфара', 'Хисор', 'Зафаробод', 'Ничони', 'Вахдат', 'Мехнатобод', 'Уяс', 'Дж.Расулов', 
                'Конибодом', 'Дусти', 'Ниёзбек','Истаравшан', 'Рогун','Гончи', 'Чашмасор', 'Нофароч', 'Ободи', 
                'Каракчикум', 'Оббурдон', 'Куруш', 'Ворух', 'Гулякандоз', 'Некфайз', 'Сомгор', 'Пунук', 'Панчакент', 
                'Кулканд', 'Оппон', 'Файзобод', 'Турсунзода', 'Гусар', 'Равшан','Ифтихор', 'Х.Алиев', 'Ёри', 
-               'Мучун', 'Саразм'],
-    'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'торговля', 
+               'Мучун', 'Саразм']})
+data4 = pd.DataFrame({'loan_goal': ['Животноводство и переработка молока', 'Приобретение техники', 'Ремонт дома', 'торговля', 
                   'Земледелие', 'Приобретение мебели', 'Оплата на лечение', 'Проведение мероприятий', 'Оплата поездок',
                   'Услуги', 'Переоборудование транспорта', 'Потребнужды', 'Оплата образования', 'Производство', 
                   'Покупка квартиры', 'Потреб.другое', 'Ремонт места деятельности', 'Сельское хозяйство', 'Все', 
-                  'Сушка фруктов', 'Коммерческий'],
-    'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля', 'Зеленый кредит - Печки', 
+                  'Сушка фруктов', 'Коммерческий']})
+data5 = pd.DataFrame({'sector': ['Животноводство', 'Потреб Экспресс', 'Потребнужды', 'Торговля', 'Зеленый кредит - Печки', 
                'Сельхозкультура (ТАФФ)', 'Ремонт жилья', 'Бизнес Экспресс', 'Услуги', 'KFW - Ремонт жилья',
                'Сельхозтехника (ТАФФ)', 'KFW - Покупка и строит-во жилья', 'Производство', 'Образование', 
                'Мигрант-бизнес 2', 'Мигрант-Потреб 2', 'Покупка и строит-во жилья', 'Товары в кредит', 'Корманд-кредит', 
                'Мигрант', 'Старт-бизнес', 'Зеленый кредит - Солнечные батареи', ' Жилье для сотрудников', 'Достижения', 
-               'Сельхозкультура (Сароб)', 'Сельхозкультура-кредитная линия'],
-    'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога'],
-    'currency': ['Доллар США', 'Сомони', 'Рос.рубль']
-})
+               'Сельхозкультура (Сароб)', 'Сельхозкультура-кредитная линия']})
+data6 = pd.DataFrame({'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога']})
+data7 = pd.DataFrame({'currency': ['Доллар США', 'Сомони', 'Рос.рубль']})
 
 # Отдельные DataFrame для кодированных значений
-nationality_encoded1 = pd.get_dummies(new_data['Nationality']).iloc[0, :]
-filial_encoded1 = pd.get_dummies(new_data['Filial']).iloc[0, :]
-region_encoded1 = pd.get_dummies(new_data['Region']).iloc[0, :]
-loan_goal_encoded1 = pd.get_dummies(new_data['loan_goal']).iloc[0, :]
-sector_encoded1 = pd.get_dummies(new_data['sector']).iloc[0, :]
-currency_encoded1 = pd.get_dummies(new_data['currency']).iloc[0, :]
-pledge_encoded1 = pd.get_dummies(new_data['pledge']).iloc[0, :]
+nationality_encoded1 = pd.get_dummies(data1['Nationality']).iloc[0, :]
+filial_encoded1 = pd.get_dummies(data2['Filial']).iloc[0, :]
+region_encoded1 = pd.get_dummies(data3['Region']).iloc[0, :]
+loan_goal_encoded1 = pd.get_dummies(data4['loan_goal']).iloc[0, :]
+sector_encoded1 = pd.get_dummies(data5['sector']).iloc[0, :]
+currency_encoded1 = pd.get_dummies(data7['currency']).iloc[0, :]
+pledge_encoded1 = pd.get_dummies(data6['pledge']).iloc[0, :]
 
 # Функции для предсказаний
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
@@ -159,7 +157,7 @@ def main():
         Gender = 1
         
     selected_nationality = st.selectbox('Национальность:', nationality_encoded1)    
-    nationality_encoded += list(pd.get_dummies(new_data['Nationality'][selected_nationality]).iloc[0, :])
+    nationality_encoded += list(pd.get_dummies(data1['Nationality'][selected_nationality]).iloc[0, :])
     
     Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
 
@@ -186,22 +184,22 @@ def main():
         type_of_credit = 1
 
     selected_filial = st.selectbox('Филиал банка:', filial_encoded1)
-    filial_encoded += list(pd.get_dummies(new_data['Filial'][selected_filial]).iloc[0, :])
+    filial_encoded += list(pd.get_dummies(data2['Filial'][selected_filial]).iloc[0, :])
     
     selected_region = st.selectbox('Регион\город проживания:', region_encoded1)
-    region_encoded += list(pd.get_dummies(new_data['Region'][selected_region]).iloc[0, :])
+    region_encoded += list(pd.get_dummies(data3['Region'][selected_region]).iloc[0, :])
 
     selected_sector = st.selectbox('Сфера деятельности:', sector_encoded1)
-    sector_encoded += list(pd.get_dummies(new_data['sector'][selected_sector]).iloc[0, :])
+    sector_encoded += list(pd.get_dummies(data5['sector'][selected_sector]).iloc[0, :])
 
     selected_goal = st.selectbox('Цель кредита:', loan_goal_encoded1)
-    loan_goal_encoded += list(pd.get_dummies(new_data['loan_goal'][selected_goal]).iloc[0, :]) 
+    loan_goal_encoded += list(pd.get_dummies(data4['loan_goal'][selected_goal]).iloc[0, :]) 
 
     selected_pledge = st.selectbox('Тип залога:', pledge_encoded1)
-    pledge_encoded += list(pd.get_dummies(new_data['pledge'][selected_pledge]).iloc[0, :])  
+    pledge_encoded += list(pd.get_dummies(data6['pledge'][selected_pledge]).iloc[0, :])  
     
     selected_currancy = st.selectbox('Тип валюты:', currency_encoded1)
-    currency_encoded += list(pd.get_dummies(new_data['currency'][selected_currancy]).iloc[0, :])
+    currency_encoded += list(pd.get_dummies(data7['currency'][selected_currancy]).iloc[0, :])
 
     Loan_amount = st.number_input('На какую сумму хотите взять кредит(в сомони)?', step=1, value=0) 
 
