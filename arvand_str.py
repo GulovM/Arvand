@@ -46,22 +46,6 @@ data5 = pd.DataFrame({'sector': ['Животноводство', 'Потреб �
                'Сельхозкультура (Сароб)', 'Сельхозкультура-кредитная линия']})
 data6 = pd.DataFrame({'pledge': ['Поручительство(Группа)', 'Недвижимость', 'Движимое имущество', 'Поручительство','Без залога']})
 data7 = pd.DataFrame({'currency': ['Доллар США', 'Сомони', 'Рос.рубль']})
-
-# Отдельные DataFrame для кодированных значений
-nationality_encoded = pd.get_dummies(data1['Nationality'])
-filial_encoded = pd.get_dummies(data2['Filial'])
-region_encoded = pd.get_dummies(data3['Region'])
-loan_goal_encoded = pd.get_dummies(data4['loan_goal'])
-sector_encoded = pd.get_dummies(data5['sector'])
-currency_encoded = pd.get_dummies(data7['currency'])
-pledge_encoded = pd.get_dummies(data6['pledge'])
-
-used_keys = {}
-
-def get_encoded_feature(feature_name, data):
-    selected_feature = st.selectbox(f'Select {feature_name}:', data)
-    return pd.get_dummies(selected_feature)
-
     
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
@@ -146,8 +130,10 @@ def main():
         Gender = 0
     else:
         Gender = 1
-    nationality_encoded = []    
-    nationality_encoded = get_encoded_feature('Nationality', data1)
+        
+    nationality_encoded = []  
+    selected_nationality = st.selectbox('Введите национальность:', data1)
+    nationality_encoded = pd.get_dummies(selected_nationality)
     
     Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
 
@@ -172,22 +158,28 @@ def main():
         type_of_credit = 1
         
     filial_encoded = []
-    filial_encoded = get_encoded_feature('Filial', data2)
+    selected_filial = st.selectbox('Филиал Банка:', data2)
+    filial_encoded = pd.get_dummies(selected_filial)
 
     region_encoded = []
-    region_encoded = get_encoded_feature('Region', data3)
+    selected_region = st.selectbox('Город\Регион проживания:', data3)
+    region_encoded = pd.get_dummies(selected_region)
 
     sector_encoded = []
-    sector_encoded = get_encoded_feature('sector', data5)
+    selected_sector = st.selectbox('Сфера деятельности:', data5)
+    sector_encoded = pd.get_dummies(selected_sector)
 
     selected_goal = []
-    loan_goal_encoded = get_encoded_feature('loan_goal', data4)
+    selected_goal = st.selectbox('Цель кредита:', data4)
+    loan_goal_encoded = pd.get_dummies(selected_goal)
     
     selected_pledge = []
-    pledge_encoded = get_encoded_feature('pledge', data6)
+    selected_pledge = st.selectbox('Тип залога:', data6)
+    pledge_encoded = pd.get_dummies(selected_pledge)
     
     currency_encoded = []
-    currency_encoded = get_encoded_feature('currency', data7)
+    currency_encoded = st.selectbox('Тип валюты:', data7)
+    currency_encoded = pd.get_dummies(selected_pledge)
 
     Loan_amount = st.number_input('На какую сумму хотите взять кредит(в сомони)?', step=1, value=0) 
 
