@@ -246,12 +246,12 @@ def main():
     result4 = ""
     if st.button("Predict"):
         result1, result2 = issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded)
         if result1 == 0:
             result3 = Credit_sum(Gender, FamilySize, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded, result1)
             st.success(f'Сумму, которую вы ввели, пока что вам недоступно')
@@ -260,7 +260,7 @@ def main():
             st.success(f'Кредит будет выдан с вероятностью {result1[0]*100:.2f}%')
             st.success(f'Вероятность возврата кредита вовремя: {result2[0]*100:.2f}%')
             result4 = Delays_days(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
-                 Net_profit, Age, FamilyStatus, Education, business_experiense, type_of_credit, has_overdue,
+                 Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
                  sector_encoded, currency_encoded, pledge_encoded)
             st.success(f'Сколько примерно дней вы возможно просрочите: {(result4[0]).astype(int)}')
