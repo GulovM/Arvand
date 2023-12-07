@@ -227,8 +227,11 @@ def main():
         Debt = st.number_input('Введите сумму долга:', step=1, value=0)
     else:
         Debt = 0
-    high_debt = (Debt > 10000).astype(int)
-    
+    if Debt > 10000:
+        high_debt = 1
+    else:
+        high_debt = 0
+        
     options = ['0-5', '5-10', '10-15', '15-20', '20-25', '25-40', '40-50', '50+']
     bus_exp =  st.radio("Стаж работы:", options)
     label_encoder = LabelEncoder()
