@@ -131,9 +131,13 @@ def main():
     else:
         Gender = 1
         
-    nationality_encoded = []  
-    selected_nationality = st.selectbox('Введите национальность:', data1)
-    nationality_encoded = pd.get_dummies(selected_nationality)
+# Создаем dummy-столбцы со значениями False для всех категорий
+nationality_encoded = pd.get_dummies(data1, prefix='', prefix_sep='').astype(bool)
+# Получаем выбор пользователя
+selected_nationality = st.selectbox('Введите национальность:', data1)
+# Если выбор сделан, обновляем соответствующий dummy-столбец в True
+if selected_nationality is not None:
+    nationality_encoded = nationality_encoded[selected_nationality].astype(bool)
     
     Age = st.number_input('Сколько вам полных лет?', step=1, value=0)
 
@@ -157,31 +161,37 @@ def main():
     else:
         type_of_credit = 1
         
-    filial_encoded = []
+    filial_encoded = pd.get_dummies(data2, prefix='', prefix_sep='').astype(bool)
     selected_filial = st.selectbox('Филиал Банка:', data2)
-    filial_encoded = pd.get_dummies(selected_filial)
+    if selected_filial is not None:
+        filial_encoded = filial_encoded[selected_filial].astype(bool)
 
-    region_encoded = []
+    region_encoded = pd.get_dummies(data3, prefix='', prefix_sep='').astype(bool)
     selected_region = st.selectbox('Город\Регион проживания:', data3)
-    region_encoded = pd.get_dummies(selected_region)
+    if selected_region is not None:
+        region_encoded = region_encoded[selected_region].astype(bool)
 
-    sector_encoded = []
+    sector_encoded = pd.get_dummies(data5, prefix='', prefix_sep='').astype(bool)
     selected_sector = st.selectbox('Сфера деятельности:', data5)
-    sector_encoded = pd.get_dummies(selected_sector)
+    if selected_sector is not None:
+        sector_encoded = sector_encoded[selected_sector].astype(bool)
 
-    selected_goal = []
+    loan_goal_encoded = pd.get_dummies(data4, prefix='', prefix_sep='').astype(bool)
     selected_goal = st.selectbox('Цель кредита:', data4)
-    loan_goal_encoded = pd.get_dummies(selected_goal)
-    
-    selected_pledge = []
+    if selected_goal is not None:
+        loan_goal_encoded = loan_goal_encoded[selected_goal].astype(bool)
+        
+    pledge_encoded = pd.get_dummies(data6, prefix='', prefix_sep='').astype(bool)
     selected_pledge = st.selectbox('Тип залога:', data6)
-    pledge_encoded = pd.get_dummies(selected_pledge)
+    if selected_pledge is not None:
+        pledge_encoded = pledge_encoded[selected_pledge].astype(bool)
     
-    currency_encoded = []
-    currency_encoded = st.selectbox('Тип валюты:', data7)
-    currency_encoded = pd.get_dummies(selected_pledge)
+    currency_encoded = pd.get_dummies(data7, prefix='', prefix_sep='').astype(bool)
+    selected_currancy = st.selectbox('Тип валюты:', data7)
+    if selected_currancy is not None:      
+        currency_encoded = currency_encoded[selected_currancy].astype(bool)
 
-    Loan_amount = st.number_input('На какую сумму хотите взять кредит(в сомони)?', step=1, value=0) 
+    Loan_amount = st.number_input('На какую сумму хотите взять кредит?', step=1, value=0) 
 
     Loan_term = st.number_input('На какой срок вы хотите взять кредит(месяц)?', step=1, value=0) 
 
