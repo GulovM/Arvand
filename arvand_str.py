@@ -56,24 +56,10 @@ sector_encoded = pd.get_dummies(data5['sector'])
 currency_encoded = pd.get_dummies(data7['currency'])
 pledge_encoded = pd.get_dummies(data6['pledge'])
 
-# Функции для предсказаний
 def get_encoded_feature(feature_name, data):
-    if feature_name == 'nationality_encoded':
-        selected_feature = st.selectbox(f'Ваша национальность:', data)
-    elif feature_name == 'filial_encoded':
-        selected_feature = st.selectbox(f'Филиал Банка:', data)
-    elif feature_name == 'region_encoded':
-        selected_feature = st.selectbox(f'Город\Регион проживания:', data)
-    elif feature_name == 'loan_goal_encoded':
-        selected_feature = st.selectbox(f'Цель кредита:', data)
-    elif feature_name == 'sector_encoded':
-        selected_feature = st.selectbox(f'Сфера деятельности:', data)
-    elif feature_name == 'currency_encoded':
-        selected_feature = st.selectbox(f'Валюта кредита:', data) 
-    elif feature_name == 'pledge_encoded':
-        selected_feature = st.selectbox(f'Тип залога:', data)
+    selected_feature = st.selectbox(f'Select {feature_name}:', data, key=f'{feature_name}_selectbox')
     return pd.get_dummies(selected_feature)
-
+    
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
                  Net_profit, Age, FamilyStatus, Education, business_experience, type_of_credit, has_overdue,
                  high_debt, nationality_encoded, filial_encoded, region_encoded, loan_goal_encoded, 
