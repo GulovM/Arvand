@@ -48,13 +48,13 @@ data6 = pd.DataFrame({'pledge': ['Поручительство(Группа)', '
 data7 = pd.DataFrame({'currency': ['Доллар США', 'Сомони', 'Рос.рубль']})
 
 # Отдельные DataFrame для кодированных значений
-nationality_encoded1 = pd.get_dummies(data1['Nationality']).iloc[0, :]
-filial_encoded1 = pd.get_dummies(data2['Filial']).iloc[0, :]
-region_encoded1 = pd.get_dummies(data3['Region']).iloc[0, :]
-loan_goal_encoded1 = pd.get_dummies(data4['loan_goal']).iloc[0, :]
-sector_encoded1 = pd.get_dummies(data5['sector']).iloc[0, :]
-currency_encoded1 = pd.get_dummies(data7['currency']).iloc[0, :]
-pledge_encoded1 = pd.get_dummies(data6['pledge']).iloc[0, :]
+nationality_encoded = pd.get_dummies(data1['Nationality'])
+filial_encoded = pd.get_dummies(data2['Filial'])
+region_encoded = pd.get_dummies(data3['Region'])
+loan_goal_encoded = pd.get_dummies(data4['loan_goal'])
+sector_encoded = pd.get_dummies(data5['sector'])
+currency_encoded = pd.get_dummies(data7['currency'])
+pledge_encoded = pd.get_dummies(data6['pledge'])
 
 # Функции для предсказаний
 def issue_a_loan(Gender, FamilySize, Loan_amount, Loan_term, Repayment, Grace_preiod, Debt, Lending_stage,
